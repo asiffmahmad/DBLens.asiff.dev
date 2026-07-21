@@ -2,7 +2,7 @@
   "name": "dblens-vscode",
   "displayName": "DBLens Companion",
   "description": "Start the DBLens Next.js application locally from within VS Code",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "publisher": "asiff",
   "icon": "images/icon.png",
   "repository": {

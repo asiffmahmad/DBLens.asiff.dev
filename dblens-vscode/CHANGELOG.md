@@ -2,6 +2,16 @@
 
 All notable changes to the **DBLens Companion** extension will be documented in this file.
 
+## [0.2.0] - 2026-07-21
+
+### Added
+- Extension icon on VS Code Marketplace.
+- Comprehensive README with badges, usage guide, and feature list.
+- CHANGELOG.md for release tracking.
+- Unit test scaffolding for extension command verification.
+- `.vscodeignore` to keep the VSIX package size minimal.
+- Robust error handling and terminal cleanup in `extension.ts`.
+
 ## [0.1.0] - 2026-07-21
 
 ### Added
