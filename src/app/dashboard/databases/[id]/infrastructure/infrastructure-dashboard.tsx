@@ -191,7 +191,7 @@ export function InfrastructureDashboard({ databaseId }: { databaseId: string }) 
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4 text-sm">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid sm:grid-cols-2 gap-4">
               <div>
                 <span className="text-muted-foreground block text-xs uppercase mb-1">Architecture</span>
                 <span className="font-medium">{report.highAvailability}</span>

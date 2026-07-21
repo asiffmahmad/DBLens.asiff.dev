@@ -86,7 +86,7 @@ export function ExplorerSidebar({ databaseId, schema }: { databaseId: string; sc
   };
 
   return (
-    <div className="w-64 border-r border-border bg-card/10 flex flex-col h-full shrink-0">
+    <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-border bg-card/10 flex flex-col h-64 md:h-full shrink-0">
       <div className="p-4 border-b border-border">
         <div className="relative">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />

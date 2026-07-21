@@ -80,7 +80,7 @@ export default async function SchemaHistoryPage({
                     </div>
                   </div>
 
-                  <div className="bg-muted/30 p-3 rounded-lg border border-border/50 grid grid-cols-2 gap-4 text-sm mt-4">
+                  <div className="bg-muted/30 p-3 rounded-lg border border-border/50 grid sm:grid-cols-2 gap-4 text-sm mt-4">
                     <div>
                       <span className="text-muted-foreground block mb-1">Status</span>
                       <span className="flex items-center text-green-500 gap-1"><CheckCircle2 className="w-4 h-4" /> Success</span>

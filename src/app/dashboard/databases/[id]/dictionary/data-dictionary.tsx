@@ -100,8 +100,8 @@ export function DataDictionary({ schema, databaseId }: { schema: DatabaseSchema,
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-between items-center">
-        <div className="relative w-96">
+      <div className="flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
+        <div className="relative w-full sm:w-96">
           <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input 
             type="text"
@@ -111,7 +111,7 @@ export function DataDictionary({ schema, databaseId }: { schema: DatabaseSchema,
             className="w-full pl-9 bg-card border border-border rounded-md px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-primary transition-all"
           />
         </div>
-        <Button variant="secondary" size="sm" onClick={exportCSV} className="gap-2">
+        <Button variant="secondary" size="sm" onClick={exportCSV} className="gap-2 shrink-0">
           <Download className="w-4 h-4" /> Export CSV
         </Button>
       </div>

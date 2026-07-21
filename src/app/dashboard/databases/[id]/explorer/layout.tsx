@@ -33,7 +33,7 @@ export default async function ExplorerLayout({
   }
 
   return (
-    <div className="flex h-full w-full">
+    <div className="flex flex-col md:flex-row h-full w-full">
       <ExplorerSidebar databaseId={id} schema={schema} />
 
       {/* Main Content Area for Details */}

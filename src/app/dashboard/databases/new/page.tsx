@@ -125,8 +125,8 @@ export default function NewDatabasePage() {
             </div>
           ) : (
             <>
-              <div className="grid grid-cols-3 gap-6">
-                <div className="col-span-2 space-y-2">
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="md:col-span-2 space-y-2">
                   <label className="text-sm font-medium">Host</label>
                   <input 
                     type="text" 
@@ -150,7 +150,7 @@ export default function NewDatabasePage() {
                 </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
+              <div className="grid sm:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-sm font-medium">Username</label>
                   <input 
