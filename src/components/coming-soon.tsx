@@ -17,3 +17,4 @@ export function ComingSoon({ title, description }: { title: string, description:
     </div>
   );
 }
+

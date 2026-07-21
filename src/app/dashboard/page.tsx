@@ -21,6 +21,7 @@ type DbConnection = {
 export default function DashboardPage() {
   const [databases, setDatabases] = useState<DbConnection[]>([]);
   const [loading, setLoading] = useState(true);
+  const [stats, setStats] = useState({ totalDatabases: 0, totalSnapshots: 0, totalTables: 0 });
 
   useEffect(() => {
     fetch("/api/databases")
@@ -33,15 +34,20 @@ export default function DashboardPage() {
         console.error("Failed to fetch databases", err);
         setLoading(false);
       });
+
+    fetch("/api/stats")
+      .then(res => res.json())
+      .then(data => setStats(data))
+      .catch(console.error);
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Databases</h1>
+          <h1 className="text-3xl font-bold tracking-tight">Global Dashboard</h1>
           <p className="text-muted-foreground mt-1">
-            Manage your database connections and explore schemas.
+            Overview of all your connected databases and application metadata.
           </p>
         </div>
         <Link href="/dashboard/databases/new">
@@ -50,6 +56,38 @@ export default function DashboardPage() {
           </Button>
         </Link>
       </div>
+
+      {!loading && (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="glass-card rounded-xl p-6 border border-border flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Total Databases</p>
+              <h2 className="text-3xl font-bold">{stats.totalDatabases}</h2>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-blue-500/10 flex items-center justify-center">
+              <Database className="w-6 h-6 text-blue-500" />
+            </div>
+          </div>
+          <div className="glass-card rounded-xl p-6 border border-border flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Total Tables Tracked</p>
+              <h2 className="text-3xl font-bold">{stats.totalTables}</h2>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-emerald-500/10 flex items-center justify-center">
+              <Server className="w-6 h-6 text-emerald-500" />
+            </div>
+          </div>
+          <div className="glass-card rounded-xl p-6 border border-border flex items-center justify-between">
+            <div>
+              <p className="text-sm font-medium text-muted-foreground mb-1">Schema Snapshots</p>
+              <h2 className="text-3xl font-bold">{stats.totalSnapshots}</h2>
+            </div>
+            <div className="h-12 w-12 rounded-full bg-purple-500/10 flex items-center justify-center">
+              <Clock className="w-6 h-6 text-purple-500" />
+            </div>
+          </div>
+        </div>
+      )}
 
       {loading ? (
         <div className="flex items-center justify-center min-h-[400px]">
