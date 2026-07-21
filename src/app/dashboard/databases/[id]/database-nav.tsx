@@ -44,20 +44,20 @@ export function DatabaseNav({ databaseId, databaseName }: { databaseId: string, 
   const basePath = `/dashboard/databases/${databaseId}`;
 
   return (
-    <div className="w-64 border-r border-border bg-card/30 flex flex-col h-full overflow-hidden shrink-0">
-      <div className="p-4 border-b border-border flex flex-col gap-4">
+    <div className="w-full md:w-64 border-b md:border-b-0 md:border-r border-border bg-card/30 flex flex-col md:h-full overflow-hidden shrink-0">
+      <div className="p-3 md:p-4 border-b border-border flex flex-row md:flex-col justify-between md:justify-start items-center md:items-start gap-4 shrink-0">
         <Link href="/dashboard" className="text-sm text-muted-foreground hover:text-foreground flex items-center transition-colors">
-          <ArrowLeft className="w-4 h-4 mr-1" /> Back to Dashboard
+          <ArrowLeft className="w-4 h-4 mr-1" /> <span className="hidden md:inline">Back to Dashboard</span><span className="md:hidden">Back</span>
         </Link>
         <div className="flex items-center space-x-2">
           <div className="p-1.5 bg-primary/10 rounded-md shrink-0">
             <Database className="w-4 h-4 text-primary" />
           </div>
-          <h2 className="font-semibold truncate" title={databaseName}>{databaseName}</h2>
+          <h2 className="font-semibold truncate max-w-[150px] md:max-w-none" title={databaseName}>{databaseName}</h2>
         </div>
       </div>
       
-      <div className="flex-1 overflow-y-auto p-3 space-y-1 custom-scrollbar">
+      <div className="flex-none md:flex-1 overflow-x-auto md:overflow-y-auto p-2 md:p-3 flex flex-row md:flex-col gap-2 md:gap-0 md:space-y-1 custom-scrollbar">
         {NAV_ITEMS.map((item) => {
           const fullHref = `${basePath}${item.href}`;
           // Active if exact match (Overview) or starts with (for sub-pages like explorer/tables/...)
@@ -66,15 +66,15 @@ export function DatabaseNav({ databaseId, databaseName }: { databaseId: string, 
             : pathname.startsWith(fullHref);
 
           return (
-            <Link key={item.name} href={fullHref}>
+            <Link key={item.name} href={fullHref} className="shrink-0">
               <div className={cn(
-                "flex items-center px-3 py-2 text-sm rounded-md transition-colors group cursor-pointer mb-1",
+                "flex items-center px-3 py-2 text-sm rounded-md transition-colors group cursor-pointer md:mb-1",
                 isActive 
                   ? "bg-primary/10 text-primary font-medium" 
                   : "text-muted-foreground hover:bg-muted hover:text-foreground"
               )}>
                 <item.icon className={cn(
-                  "w-4 h-4 mr-3 transition-all",
+                  "w-4 h-4 mr-2 md:mr-3 transition-all",
                   isActive ? "text-primary" : "opacity-50 group-hover:opacity-100 group-hover:text-primary"
                 )} />
                 <span className="truncate">{item.name}</span>

@@ -49,7 +49,7 @@ export default async function DatabaseOverviewPage({
   }
 
   return (
-    <div className="p-8 max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+    <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 h-full overflow-y-auto custom-scrollbar">
       <div className="flex items-start justify-between">
         <div>
           <div className="flex items-center gap-3">

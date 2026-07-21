@@ -46,17 +46,17 @@ export default function LandingPage() {
 
         {/* Global Nav */}
         <header className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/60 backdrop-blur-xl">
-          <div className="container mx-auto flex h-16 items-center justify-between px-6 max-w-7xl">
+          <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6 max-w-7xl">
             <div className="flex items-center gap-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20">
+              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary border border-primary/20 shrink-0">
                 <DatabaseZap className="h-5 w-5" />
               </div>
-              <span className="text-xl font-bold tracking-tight">DBLens</span>
+              <span className="text-xl font-bold tracking-tight hidden sm:block">DBLens</span>
             </div>
             <div className="flex items-center gap-4">
               <Link href="/dashboard">
-                <Button className="text-sm gap-2 rounded-full font-medium shadow-lg hover:shadow-primary/20 transition-all">
-                  Enter Workspace <ArrowRight className="h-4 w-4" />
+                <Button className="text-xs sm:text-sm gap-2 rounded-full font-medium shadow-lg hover:shadow-primary/20 transition-all px-4 sm:px-6">
+                  Enter Workspace <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
                 </Button>
               </Link>
             </div>
@@ -110,18 +110,18 @@ export default function LandingPage() {
           </section>
 
           {/* Hero Parallax Mockup */}
-          <motion.section style={{ y, opacity, scale }} className="container mx-auto px-6 max-w-6xl mb-48">
-            <div className="relative rounded-2xl border border-border/50 bg-card/20 p-2 shadow-2xl backdrop-blur-xl">
+          <motion.section style={{ y, opacity, scale }} className="container mx-auto px-4 md:px-6 max-w-6xl mb-32 md:mb-48">
+            <div className="relative rounded-2xl border border-border/50 bg-card/20 p-1.5 md:p-2 shadow-2xl backdrop-blur-xl">
               <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent rounded-2xl pointer-events-none" />
-              <div className="rounded-xl overflow-hidden border border-border/50 bg-background/90 aspect-[16/9] flex flex-col relative group">
-                <div className="h-12 border-b border-border flex items-center px-4 gap-2 bg-muted/30">
+              <div className="rounded-xl overflow-hidden border border-border/50 bg-background/90 min-h-[400px] md:aspect-[16/9] flex flex-col relative group">
+                <div className="h-10 md:h-12 border-b border-border flex items-center px-4 gap-2 bg-muted/30">
                   <div className="w-3 h-3 rounded-full bg-red-500/50" />
                   <div className="w-3 h-3 rounded-full bg-amber-500/50" />
                   <div className="w-3 h-3 rounded-full bg-green-500/50" />
-                  <div className="ml-4 text-xs font-mono text-muted-foreground">mysql://production-cluster-01.db</div>
+                  <div className="ml-2 md:ml-4 text-[10px] md:text-xs font-mono text-muted-foreground truncate max-w-[200px] md:max-w-none">mysql://production-cluster-01.db</div>
                 </div>
-                <div className="flex-1 flex">
-                  <div className="w-48 border-r border-border bg-card/30 p-4 space-y-4">
+                <div className="flex-1 flex flex-col md:flex-row overflow-hidden">
+                  <div className="hidden md:block w-48 border-r border-border bg-card/30 p-4 space-y-4">
                     <div className="h-4 w-24 bg-primary/20 rounded" />
                     <div className="space-y-2">
                       <div className="h-3 w-full bg-muted rounded" />
@@ -129,13 +129,13 @@ export default function LandingPage() {
                       <div className="h-3 w-5/6 bg-muted rounded" />
                     </div>
                   </div>
-                  <div className="flex-1 p-8">
-                     <div className="flex gap-4 mb-6">
-                        <div className="h-24 w-1/3 bg-card border border-border rounded-xl" />
-                        <div className="h-24 w-1/3 bg-card border border-border rounded-xl" />
-                        <div className="h-24 w-1/3 bg-card border border-border rounded-xl" />
+                  <div className="flex-1 p-4 md:p-8 flex flex-col">
+                     <div className="grid grid-cols-2 md:flex md:flex-row gap-2 md:gap-4 mb-4 md:mb-6">
+                        <div className="h-16 md:h-24 w-full md:w-1/3 bg-card border border-border rounded-xl" />
+                        <div className="h-16 md:h-24 w-full md:w-1/3 bg-card border border-border rounded-xl" />
+                        <div className="h-16 md:h-24 w-full md:w-1/3 bg-card border border-border rounded-xl hidden md:block" />
                      </div>
-                     <div className="h-64 w-full bg-card border border-border rounded-xl flex items-end p-4 gap-2">
+                     <div className="flex-1 min-h-[150px] w-full bg-card border border-border rounded-xl flex items-end p-2 md:p-4 gap-1 md:gap-2">
                         {[40, 70, 45, 90, 65, 85, 60, 100, 75, 50].map((h, i) => (
                           <div key={i} className="flex-1 bg-primary/30 rounded-t-sm transition-all hover:bg-primary/50" style={{ height: `${h}%` }} />
                         ))}

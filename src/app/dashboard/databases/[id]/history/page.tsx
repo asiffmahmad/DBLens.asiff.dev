@@ -44,7 +44,7 @@ export default async function SchemaHistoryPage({
         </div>
       ) : (
         <div className="relative border-l-2 border-border ml-4 space-y-12 pb-12 mt-8">
-          {db.snapshots.map((snapshot, i) => {
+          {db.snapshots.map((snapshot: any, i: number) => {
             let stats = { tables: 0 };
             try {
               if (snapshot.schemaPayload) {
