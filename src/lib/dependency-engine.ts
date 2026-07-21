@@ -47,7 +47,7 @@ export function calculateImpactRadius(schema: DatabaseSchema, tableName: string)
 
   // 4. Find triggers
   for (const trigger of schema.triggers || []) {
-    if (tableRegex.test(trigger.actionStatement)) {
+    if (tableRegex.test(trigger.definition)) {
       dependentTriggers.push(trigger);
     }
   }
