@@ -94,16 +94,32 @@ export function CompareViewer({ snapshots }: { snapshots: any[] }) {
         </div>
       ) : (
         <div className="space-y-6">
-          <div className="flex gap-4 mb-6">
-            <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 px-3 py-1 text-sm gap-2">
-              <span className="font-bold">{addedCount}</span> Added
-            </Badge>
-            <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/20 px-3 py-1 text-sm gap-2">
-              <span className="font-bold">{removedCount}</span> Removed
-            </Badge>
-            <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/20 px-3 py-1 text-sm gap-2">
-              <span className="font-bold">{modifiedCount}</span> Modified
-            </Badge>
+          <div className="flex gap-4 mb-6 justify-between items-center">
+            <div className="flex gap-4">
+              <Badge variant="outline" className="bg-green-500/10 text-green-500 border-green-500/20 px-3 py-1 text-sm gap-2">
+                <span className="font-bold">{addedCount}</span> Added
+              </Badge>
+              <Badge variant="outline" className="bg-red-500/10 text-red-500 border-red-500/20 px-3 py-1 text-sm gap-2">
+                <span className="font-bold">{removedCount}</span> Removed
+              </Badge>
+              <Badge variant="outline" className="bg-amber-500/10 text-amber-500 border-amber-500/20 px-3 py-1 text-sm gap-2">
+                <span className="font-bold">{modifiedCount}</span> Modified
+              </Badge>
+            </div>
+            <button 
+              onClick={() => {
+                const script = changes.map(c => c.rollbackSql).filter(Boolean).join('\n\n');
+                const blob = new Blob([script], { type: 'text/sql' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `rollback_${targetId}_to_${sourceId}.sql`;
+                a.click();
+              }}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors"
+            >
+              Download Rollback SQL
+            </button>
           </div>
 
           <div className="bg-card border border-border rounded-xl overflow-hidden">
@@ -138,6 +154,11 @@ export function CompareViewer({ snapshots }: { snapshots: any[] }) {
                     <td className="px-4 py-3">
                       <div className="font-semibold">{change.tableName} {change.entityType !== "TABLE" && `> ${change.entityName}`}</div>
                       {change.details && <div className="text-xs text-muted-foreground mt-1 font-mono bg-background/50 p-1 rounded inline-block">{change.details}</div>}
+                      {change.rollbackSql && (
+                        <div className="mt-2 text-[10px] text-muted-foreground/70 font-mono overflow-x-auto whitespace-pre">
+                          Rollback: {change.rollbackSql}
+                        </div>
+                      )}
                     </td>
                   </tr>
                 ))}
