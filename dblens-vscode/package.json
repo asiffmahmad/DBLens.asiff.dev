@@ -4,15 +4,27 @@
   "description": "Start the DBLens Next.js application locally from within VS Code",
   "version": "0.1.0",
   "publisher": "asiff",
+  "icon": "images/icon.png",
   "repository": {
     "type": "git",
     "url": "https://github.com/asiffmahmad/DBLens.asiff.dev"
+  },
+  "homepage": "https://github.com/asiffmahmad/DBLens.asiff.dev#readme",
+  "bugs": {
+    "url": "https://github.com/asiffmahmad/DBLens.asiff.dev/issues"
   },
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Education"
+  ],
+  "keywords": [
+    "database",
+    "dblens",
+    "schema",
+    "validator"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
@@ -28,11 +40,19 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint"
+    "pretest": "npm run compile && npm run lint",
+    "lint": "tsc -p ./ --noEmit",
+    "test": "node ./out/test/runTest.js"
   },
   "devDependencies": {
-    "@types/vscode": "^1.80.0",
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.6",
     "@types/node": "18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^7.1.0",
+    "@typescript-eslint/parser": "^7.1.0",
+    "@vscode/test-electron": "^2.3.9",
+    "eslint": "^8.57.0",
     "typescript": "^5.1.6"
   }
 }

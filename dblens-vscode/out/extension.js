@@ -36,35 +36,49 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.activate = activate;
 exports.deactivate = deactivate;
 const vscode = __importStar(require("vscode"));
+let terminal = null;
 function activate(context) {
-    let terminal = null;
-    let disposable = vscode.commands.registerCommand('dblens.startLocal', async () => {
-        // Check if terminal already exists
-        if (!terminal || terminal.exitStatus !== undefined) {
-            // Find the root workspace folder (assuming DBLens is in the first workspace folder)
+    const disposable = vscode.commands.registerCommand('dblens.startLocal', async () => {
+        try {
             const workspaceFolders = vscode.workspace.workspaceFolders;
             if (!workspaceFolders || workspaceFolders.length === 0) {
-                vscode.window.showErrorMessage("DBLens requires an open workspace.");
+                vscode.window.showErrorMessage("DBLens requires an open workspace folder.");
                 return;
             }
-            terminal = vscode.window.createTerminal({
-                name: "DBLens Server",
-                cwd: workspaceFolders[0].uri.fsPath
-            });
-            terminal.show();
-            // Start the Next.js dev server
-            terminal.sendText('npm run dev');
+            const rootPath = workspaceFolders[0].uri.fsPath;
+            if (!terminal || terminal.exitStatus !== undefined) {
+                terminal = vscode.window.createTerminal({
+                    name: "DBLens Server",
+                    cwd: rootPath
+                });
+                terminal.show();
+                terminal.sendText('npm run dev');
+            }
+            else {
+                terminal.show();
+            }
+            const action = await vscode.window.showInformationMessage('DBLens local server is starting on port 3000.', 'Open Dashboard');
+            if (action === 'Open Dashboard') {
+                vscode.env.openExternal(vscode.Uri.parse('http://localhost:3000/dashboard'));
+            }
         }
-        else {
-            terminal.show();
-        }
-        // Notify user and give them a button to open it
-        const action = await vscode.window.showInformationMessage('DBLens local server is starting on port 3000.', 'Open Dashboard');
-        if (action === 'Open Dashboard') {
-            vscode.env.openExternal(vscode.Uri.parse('http://localhost:3000/dashboard'));
+        catch (error) {
+            vscode.window.showErrorMessage(`Failed to start DBLens: ${error instanceof Error ? error.message : 'Unknown error'}`);
         }
     });
     context.subscriptions.push(disposable);
+    // Clean up terminal on deactivate
+    context.subscriptions.push({
+        dispose: () => {
+            if (terminal) {
+                terminal.dispose();
+            }
+        }
+    });
 }
-function deactivate() { }
+function deactivate() {
+    if (terminal) {
+        terminal.dispose();
+    }
+}
 //# sourceMappingURL=extension.js.map
