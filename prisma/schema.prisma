@@ -1,0 +1,35 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model DatabaseConnection {
+  id                String   @id @default(cuid())
+  name              String
+  host              String?
+  port              Int?
+  username          String?
+  encryptedPassword String?
+  databaseName      String?
+  jdbcUrl           String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+  snapshots         SchemaSnapshot[]
+}
+
+model SchemaSnapshot {
+  id                 String   @id @default(cuid())
+  databaseId         String
+  database           DatabaseConnection @relation(fields: [databaseId], references: [id], onDelete: Cascade)
+  label              String
+  notes              String?
+  checksum           String
+  schemaPayload      String   // Using String since SQLite doesn't have a native JSON column type
+  createdAt          DateTime @default(now())
+}
